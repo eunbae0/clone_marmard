@@ -4,6 +4,13 @@ import Footer from "./Footer";
 import Home from "../pages/Home";
 
 export default function AppRouter() {
+  // const productList = [
+  //   {
+  //     category: "bodywash",
+  //     categoryComponent: "BodyWash",
+
+  //   }
+  // ]
   return ( 
     <>
       <BrowserRouter>
@@ -19,12 +26,15 @@ export default function AppRouter() {
           <Route path="shopinfo/contact" element={<Contact />} />
           <Route path="product" element={<Shop/>}>
             <Route index element={<HandCream />} />
-            <Route path="bodywash" element={<BodyWash />}/>
+            <Route path=":productName" element={<></>} />
+            {/* {productList.map(item => (
+              <Route path={item.category} element={<item.categoryComponent />}/>
+            ))}
             <Route path="bodylotion" element={<BodyLotion />}/>
             <Route path="bodyspary" element={<BodySpray />}/>
             <Route path="handcream" element={<HandCream />}/>
             <Route path="handwash" element={<HandWash />}/>
-            <Route path="set" element={<Set />}/>
+            <Route path="set" element={<Set />}/> */}
           </Route>
           <Route path="board" element={<Board/>}>
             <Route index element={<Notice />} />
