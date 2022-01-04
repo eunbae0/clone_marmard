@@ -1,14 +1,13 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navigation from "./Navigation";
 import Footer from "./Footer";
-import Home from "../pages/Home";
+import {Login, Join, MyShop, Home, BrandStory, Contact, Shop, Community, Notice, Review, Order} from "../pages/PagesIndex";
 
 export default function AppRouter() {
   // const productList = [
   //   {
   //     category: "bodywash",
   //     categoryComponent: "BodyWash",
-
   //   }
   // ]
   return ( 
@@ -25,8 +24,8 @@ export default function AppRouter() {
           <Route path="shopinfo/brandstory" element={<BrandStory />} />
           <Route path="shopinfo/contact" element={<Contact />} />
           <Route path="product" element={<Shop/>}>
-            <Route index element={<HandCream />} />
-            <Route path=":productName" element={<></>} />
+            {/* <Route index element={<HandCream />} /> */}
+            {/* <Route path=":productName" element={<></>} /> */}
             {/* {productList.map(item => (
               <Route path={item.category} element={<item.categoryComponent />}/>
             ))}
@@ -36,11 +35,12 @@ export default function AppRouter() {
             <Route path="handwash" element={<HandWash />}/>
             <Route path="set" element={<Set />}/> */}
           </Route>
-          <Route path="board" element={<Board/>}>
+          <Route path="board" element={<Community/>}>
             <Route index element={<Notice />} />
             <Route path="notice" element={<Notice />}/>
             <Route path="review" element={<Review />}/>
           </Route>
+          <Route path="order" element={<Order />}/>
           <Route path="order" element={<Order />}/>
         </Routes>
         <Footer />
