@@ -23,7 +23,7 @@ export default function AppRouter() {
           <Route path="/" element={<Home />} />
           <Route path="shopinfo/brandstory" element={<BrandStory />} />
           <Route path="shopinfo/contact" element={<Contact />} />
-          <Route path="product" element={<Shop/>}>
+          <Route path="product/:productname" element={<Shop/>}>
             {/* <Route index element={<HandCream />} /> */}
             {/* <Route path=":productName" element={<></>} /> */}
             {/* {productList.map(item => (
