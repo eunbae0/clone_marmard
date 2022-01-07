@@ -6,10 +6,10 @@ const Nav = styled.nav`
   position: ${props => props.isScrolled ? "fixed" : "relative"};
   background: ${props => props.isScrolled ? "rgba(255, 255, 255, .7)" : "#fff"};
   width: 100%;
-  height: ${props => props.isScrolled ? "65px" : "100px"};
+  height: ${props => props.isScrolled ? "65px" : "91px"};
 `
 const NavDiv = styled.div`
-  width: 1024px;
+  width: 1280px; /* 반응형 > 줄어들면 1024px로 변경 */
   margin: 0 auto;
   display: flex;
   z-index: 99;
@@ -19,7 +19,7 @@ const NavLeft = styled.div`
   flex: 3;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: start; /* 반응형 > 줄어들면 center로 변경 */
 `
 const NavLogoImg = styled.img`
   max-height: 32px;
@@ -37,6 +37,7 @@ const LoginBoxLi = styled.li`
 
 `
 const LoginBoxLink = styled(Link)`
+  display: block;
   font-size: 12px;
   line-height: 12px;
   margin: 7px 0;
@@ -72,7 +73,7 @@ const DropDownNavLink = styled(Link)`
   line-height: 65px;
   font-size:15px;
   letter-spacing:1px;
-  font-weight: 500;
+  font-weight: 600;
   color: #000;
   text-decoration: none;
   height: 100%;
@@ -87,7 +88,7 @@ const DropDownNavOrderSpan = styled.span`
   color: #fff;
   background: #424242;
   padding: 0 10px;
-  margin-left: 5px;
+  margin-left: 10px;
 `
 const DropDownDetailNav = styled.ul`
   display: none;
