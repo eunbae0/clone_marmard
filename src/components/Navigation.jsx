@@ -6,11 +6,14 @@ const Nav = styled.nav`
   position: ${props => props.isScrolled ? "fixed" : "relative"};
   background: ${props => props.isScrolled ? "rgba(255, 255, 255, .7)" : "#fff"};
   width: 100%;
-  top: 0;
-  left: 0;
+  height: ${props => props.isScrolled ? "65px" : "100px"};
+`
+const NavDiv = styled.div`
+  width: 1024px;
+  margin: 0 auto;
   display: flex;
-  height: 100px;
   z-index: 99;
+  transition: all 300ms ease-out;
 `
 const NavLeft = styled.div`
   flex: 3;
@@ -21,12 +24,13 @@ const NavLeft = styled.div`
 const NavLogoImg = styled.img`
   max-height: 32px;
 `
+const NavLogoImgLink = styled(Link)``
 const NavRight = styled.div`
   flex: 7;
-  `
+`
 const LoginBox = styled.ul`
   margin-top: 10px;
-  display: flex;
+  display: ${props => props.isScrolled ? "none" : "flex"};
   justify-content: end;
 `
 const LoginBoxLi = styled.li`
@@ -48,17 +52,20 @@ const DropDownNav = styled.ul`
   `
 const DropDownNavLi = styled.li`
   position:relative;
-  padding: 0 17.5px;
+  padding-left: 17.5px;
+  padding-right: ${props => props.isOrder ? "0" : "17.5px"};
   &:hover:before {
     display: ${props => props.noDetail ? "none": null};
     content: '';
     position: absolute;
-    height: 10px;
-    width: 10px;
+    height: 0;
+    width: 0;
     bottom: 0;
     left:50%;
     transform: translateX(-50%);
-    background-color: #000;
+    border: 7px solid transparent;
+    border-top: 0;
+    border-bottom: 7px solid #000;
   }
   `
 const DropDownNavLink = styled(Link)`
@@ -73,12 +80,21 @@ const DropDownNavLink = styled(Link)`
   &:hover {
     color:#81d8d0
   }
+  transition-duration: 300ms;
+  transition-delay: 0ms;
+`
+const DropDownNavOrderSpan = styled.span`
+  color: #fff;
+  background: #424242;
+  padding: 0 10px;
+  margin-left: 5px;
 `
 const DropDownDetailNav = styled.ul`
   display: none;
   ${DropDownNavLi}:hover & {
     display: flex
   }
+  align-items: center;
   justify-content: center;
   background: #000;
   position: fixed;
@@ -86,6 +102,10 @@ const DropDownDetailNav = styled.ul`
   padding: 10px 0;
   z-index: 999;
   width: 100%;
+  height: 20px;
+`
+const DropDownDetailNavLi = styled.li`
+  padding: 0 17px;
 `
 const DropDownDetailNavLink = styled(Link)`
   color: #fff;
@@ -95,24 +115,26 @@ const DropDownDetailNavLink = styled(Link)`
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
-  const [scrollTop, setScrollTop] = useState(0);
+  // const [scrollTop, setScrollTop] = useState(0);
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
-  }, [scrollTop])
+  }, [])
   const handleScroll = () => {
-    setScrollTop(document.documentElement.scrollTop)
-    console.log(scrollTop)
-    if (scrollTop > 2) {
+    let scrollTop = document.documentElement.scrollTop
+    if (scrollTop > 0) {
       setIsScrolled(true)
     } else {setIsScrolled(false)}
   }
   return (
     <Nav isScrolled={isScrolled}>
+    <NavDiv>
       <NavLeft>
-        <NavLogoImg src="http://marmard.com/web/upload/category/logo/cc8aba9f8c6711a2a333b488c31baa62_fU8xIyOVod_3_top.jpg" alt=""/>
+        <NavLogoImgLink to="/">
+          <NavLogoImg src="http://marmard.com/web/upload/category/logo/cc8aba9f8c6711a2a333b488c31baa62_fU8xIyOVod_3_top.jpg" alt=""/>
+        </NavLogoImgLink>
       </NavLeft>
       <NavRight>
-        <LoginBox>
+        <LoginBox isScrolled={isScrolled}>
           <LoginBoxLi>
             <LoginBoxLink to="member/login">LOGIN</LoginBoxLink>
           </LoginBoxLi>
@@ -128,35 +150,35 @@ export default function Navigation() {
             <DropDownNavLi>
               <DropDownNavLink to="shopinfo/brandstory">ABOUT</DropDownNavLink>
               <DropDownDetailNav>
-                <DropDownNavLi>
+                <DropDownDetailNavLi>
                   <DropDownDetailNavLink to="shopinfo/brandstory">BRANDSTORY</DropDownDetailNavLink>
-                </DropDownNavLi>
-                <DropDownNavLi>
+                </DropDownDetailNavLi>
+                <DropDownDetailNavLi>
                   <DropDownDetailNavLink to="shopinfo/contact">CONTACT US</DropDownDetailNavLink>
-                </DropDownNavLi>
+                </DropDownDetailNavLi>
               </DropDownDetailNav>
             </DropDownNavLi>
             <DropDownNavLi>
               <DropDownNavLink to="shopinfo/brandstory">SHOP</DropDownNavLink>
               <DropDownDetailNav>
-                <DropDownNavLi>
+                <DropDownDetailNavLi>
                   <DropDownDetailNavLink to="product/bodywash">BODYWASH</DropDownDetailNavLink>
-                </DropDownNavLi>
-                <DropDownNavLi>
+                </DropDownDetailNavLi>
+                <DropDownDetailNavLi>
                   <DropDownDetailNavLink to="product/bodylotion">BODYLOTION</DropDownDetailNavLink>
-                </DropDownNavLi>
-                <DropDownNavLi>
+                </DropDownDetailNavLi>
+                <DropDownDetailNavLi>
                   <DropDownDetailNavLink to="product/bodyspray">BODYSPRAY</DropDownDetailNavLink>
-                </DropDownNavLi>
-                <DropDownNavLi>
+                </DropDownDetailNavLi>
+                <DropDownDetailNavLi>
                   <DropDownDetailNavLink to="product/handcream">HANDCREAM</DropDownDetailNavLink>
-                </DropDownNavLi>
-                <DropDownNavLi>
+                </DropDownDetailNavLi>
+                <DropDownDetailNavLi>
                   <DropDownDetailNavLink to="product/handwash">HANDWASH</DropDownDetailNavLink>
-                </DropDownNavLi>
-                <DropDownNavLi>
+                </DropDownDetailNavLi>
+                <DropDownDetailNavLi>
                   <DropDownDetailNavLink to="product/set">SET</DropDownDetailNavLink>
-                </DropDownNavLi>
+                </DropDownDetailNavLi>
               </DropDownDetailNav>
             </DropDownNavLi>
             <DropDownNavLi noDetail={true}>
@@ -165,26 +187,30 @@ export default function Navigation() {
             <DropDownNavLi>
               <DropDownNavLink to="board/notice">COMMUNITY</DropDownNavLink>
               <DropDownDetailNav>
-                <DropDownNavLi>
+                <DropDownDetailNavLi>
                   <DropDownDetailNavLink to="board/notice">NOTICE</DropDownDetailNavLink>
-                </DropDownNavLi>
-                <DropDownNavLi>
+                </DropDownDetailNavLi>
+                <DropDownDetailNavLi>
                   <DropDownDetailNavLink to="board/notice">Q&A</DropDownDetailNavLink>
-                </DropDownNavLi>
-                <DropDownNavLi>
+                </DropDownDetailNavLi>
+                <DropDownDetailNavLi>
                   <DropDownDetailNavLink to="board/review">REVIEW</DropDownDetailNavLink>
-                </DropDownNavLi>
+                </DropDownDetailNavLi>
                 {/* <DropDownNavLi>
                   <DropDownDetailNavLink to="board/media">MEDIA</DropDownDetailNavLink>
                 </DropDownNavLi> */}
               </DropDownDetailNav>
             </DropDownNavLi>
-            <DropDownNavLi noDetail={true}>
-              <DropDownNavLink to="board/notice" spec="cart">CART</DropDownNavLink>
+            <DropDownNavLi noDetail={true} isOrder={true}>
+              <DropDownNavLink to="order">
+                CART
+                <DropDownNavOrderSpan>0</DropDownNavOrderSpan>
+              </DropDownNavLink>
             </DropDownNavLi>
           </DropDownNav>
         </div>
       </NavRight>
+    </NavDiv>
     </Nav>
   )
 }
