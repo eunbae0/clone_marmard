@@ -41,7 +41,6 @@ export default function AppRouter() {
             <Route path="review" element={<Review />}/>
           </Route>
           <Route path="order" element={<Order />}/>
-          <Route path="order" element={<Order />}/>
         </Routes>
         <Footer />
       </BrowserRouter>
